@@ -13,6 +13,7 @@ final class ViewController: FilterCamViewController {
     @IBOutlet private var segmentedControl: UISegmentedControl!
     @IBOutlet private var torchButton: UIButton!
     @IBOutlet private var recordButton: UIButton!
+    @IBOutlet private var flipCameraButton: UIButton!
 
     private let myFilters: [[CIFilter]] = [
         [],
@@ -21,11 +22,8 @@ final class ViewController: FilterCamViewController {
     ]
 
     override func viewDidLoad() {
-//        devicePosition = .front
-//        videoQuality = .low
         super.viewDidLoad()
         cameraDelegate = self
-        shouldShowDebugLabels = true
     }
 
     private func saveVideoToPhotos(_ url: URL) {
@@ -60,6 +58,17 @@ final class ViewController: FilterCamViewController {
     @IBAction func recordButtonAction(_ sender: UIButton) {
         sender.isSelected ? stopRecording() : startRecording()
         sender.isSelected = !sender.isSelected
+    }
+
+    @IBAction func flipCameraButtonAction(_ sender: UIButton) {
+
+//        if devicePosition == .back {
+//            devicePosition = .front
+//        } else {
+//            devicePosition = .back
+//        }
+
+        devicePosition = devicePosition == .back ? .front : .back
     }
 }
 

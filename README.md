@@ -80,6 +80,18 @@ As of iOS 10, Apple requires the additon of the NSCameraUsageDescription and NSM
 
 ### Getting Started:
 
+Set up this line on your AppDelegate file.
+
+```swift
+do {
+    try AVAudioSession.sharedInstance().setActive(false)
+    try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .videoRecording, options: [.mixWithOthers, .defaultToSpeaker, .allowBluetooth, .allowAirPlay, .allowBluetoothA2DP])
+    try AVAudioSession.sharedInstance().setActive(true)
+} catch {
+    NSLog("Failed to set background audio preference")
+}
+```
+
 If you install FilterCam from Cocoapods, be sure to import the module into your View Controller:
 
 ```swift
@@ -148,7 +160,6 @@ func filterCam(_ filterCam: FilterCamViewController, didFocusAtPoint tapPoint: C
 func filterCam(_ filterCam: FilterCamViewController, didFailToRecord error: Error) {
 	// Called when recorder fail to record
 }
-```
 
 ### Torch
 
@@ -163,9 +174,9 @@ Torch level specifies the value between 0.0 and 1.0.
 ### Switching Camera
 
 
-By default, FilterCam will launch to the rear facing camera. This can be changed by changing the defaultCamera property in viewDidLoad:
+By default, FilterCam will launch to the rear facing camera. This can be changed by changing the defaultCamera property `devicePosition`. The current recording will discard a new one can start to be recorder.
 ```swift
-devicePosition = .front
+devicePosition = devicePosition == .back ? .front : .back
 ```
 
 ### Configuration
@@ -195,4 +206,3 @@ If you have any questions, requests, or enhancements, feel free to submit a pull
 
 **Hajime Nakamura**
 **nkmrhj@gmail.com**
-

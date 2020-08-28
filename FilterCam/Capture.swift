@@ -91,13 +91,6 @@ final class Capture {
         self.videoDataOutputSampleBufferDelegate = videoDataOutputSampleBufferDelegate
         self.audioDataOutputSampleBufferDelegate = audioDataOutputSampleBufferDelegate
 
-        do {
-            try AVAudioSession.sharedInstance().setActive(false)
-            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .videoRecording, options: [.mixWithOthers, .defaultToSpeaker, .allowBluetooth, .allowAirPlay, .allowBluetoothA2DP])
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            NSLog("Failed to set background audio preference")
-        }
 
         // check the availability of video and audio devices
         // create and start the capture session only if the devices are present

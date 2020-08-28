@@ -93,18 +93,21 @@ final class Recorder: NSObject {
     }
 
     private func makeAssetWriterVideoInput() -> AVAssetWriterInput {
+        let defaultSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         let settings: [String: Any]
         if #available(iOS 11.0, *) {
             settings = [
                 AVVideoCodecKey: AVVideoCodecType.h264,
-                AVVideoWidthKey: currentVideoDimensions?.width ?? 0,
-                AVVideoHeightKey: currentVideoDimensions?.height ?? 0,
+                AVVideoWidthKey: currentVideoDimensions?.width ?? defaultSize.width,
+                AVVideoHeightKey: currentVideoDimensions?.height ?? defaultSize.height,
+                AVVideoScalingModeKey : AVVideoScalingModeResizeAspectFill
             ]
         } else {
             settings = [
                 AVVideoCodecKey: AVVideoCodecH264,
-                AVVideoWidthKey: currentVideoDimensions?.width ?? 0,
-                AVVideoHeightKey: currentVideoDimensions?.height ?? 0,
+                AVVideoWidthKey: currentVideoDimensions?.width ?? defaultSize.width,
+                AVVideoHeightKey: currentVideoDimensions?.height ?? defaultSize.height,
+                AVVideoScalingModeKey : AVVideoScalingModeResizeAspectFill
             ]
         }
         let input = AVAssetWriterInput(mediaType: .video, outputSettings: settings)
