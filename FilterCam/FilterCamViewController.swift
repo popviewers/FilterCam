@@ -131,7 +131,7 @@ open class FilterCamViewController: UIViewController {
         setUpRecorder()
     }
 
-    func setUpRecorder() {
+    open func setUpRecorder() {
         recorderDidAbortRecording()
         recorder = Recorder(ciContext: ciContext, devicePosition: devicePosition, preset: videoQuality)
         recorder.delegate = self
