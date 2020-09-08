@@ -68,7 +68,8 @@ final class ViewController: FilterCamViewController {
 //            devicePosition = .back
 //        }
 
-        devicePosition = devicePosition == .back ? .front : .back
+        let position: AVCaptureDevice.Position = devicePosition == .back ? .front : .back
+        setUpRecorder(position: position)
     }
 }
 

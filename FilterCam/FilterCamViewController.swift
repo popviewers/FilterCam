@@ -20,11 +20,7 @@ public protocol FilterCamViewControllerDelegate: class {
 open class FilterCamViewController: UIViewController {
     public weak var cameraDelegate: FilterCamViewControllerDelegate?
 
-    public var devicePosition = AVCaptureDevice.Position.front {
-        didSet {
-            setUpRecorder()
-        }
-    }
+    public var devicePosition = AVCaptureDevice.Position.front
 
     public var videoQuality = AVCaptureSession.Preset.high
 
@@ -128,16 +124,17 @@ open class FilterCamViewController: UIViewController {
 
         // create the CIContext instance, note that this must be done after _videoPreviewView is properly set up
         ciContext = CIContext(eaglContext: eaglContext, options: [CIContextOption.workingColorSpace: NSNull()])
-        setUpRecorder()
+        setUpRecorder(position: devicePosition)
     }
 
-    open func setUpRecorder() {
+    open func setUpRecorder(position: AVCaptureDevice.Position) {
         recorderDidAbortRecording()
-        recorder = Recorder(ciContext: ciContext, devicePosition: devicePosition, preset: videoQuality)
+        recorder = Recorder(ciContext: ciContext, devicePosition: position, preset: videoQuality)
         recorder.delegate = self
 
         setupDebugLabels()
         addGestureRecognizers()
+        devicePosition = position
     }
 
     // MARK: - Private
