@@ -20,7 +20,7 @@ public protocol FilterCamViewControllerDelegate: class {
 open class FilterCamViewController: UIViewController {
     public weak var cameraDelegate: FilterCamViewControllerDelegate?
 
-    public var devicePosition = AVCaptureDevice.Position.back {
+    public var devicePosition = AVCaptureDevice.Position.front {
         didSet {
             setUpRecorder()
         }
@@ -234,7 +234,9 @@ extension FilterCamViewController: RecorderDelegate {
         cameraDelegate?.filterCamDidStartRecording(self)
     }
 
-    func recorderDidAbortRecording() {}
+    func recorderDidAbortRecording() {
+//        cameraDelegate?.filterCam
+    }
 
     func recorderDidFinishRecording() {
         cameraDelegate?.filterCamDidFinishRecording(self)
