@@ -160,6 +160,7 @@ func filterCam(_ filterCam: FilterCamViewController, didFocusAtPoint tapPoint: C
 func filterCam(_ filterCam: FilterCamViewController, didFailToRecord error: Error) {
 	// Called when recorder fail to record
 }
+```
 
 ### Torch
 
@@ -176,7 +177,7 @@ Torch level specifies the value between 0.0 and 1.0.
 
 By default, FilterCam will launch to the rear facing camera. This can be changed by changing the defaultCamera property `devicePosition`. The current recording will discard a new one can start to be recorder.
 ```swift
-devicePosition = devicePosition == .back ? .front : .back
+setUpRecorder(position: .back | .front) {
 ```
 
 ### Configuration
