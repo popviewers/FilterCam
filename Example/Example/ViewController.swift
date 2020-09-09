@@ -61,13 +61,6 @@ final class ViewController: FilterCamViewController {
     }
 
     @IBAction func flipCameraButtonAction(_ sender: UIButton) {
-
-//        if devicePosition == .back {
-//            devicePosition = .front
-//        } else {
-//            devicePosition = .back
-//        }
-
         let position: AVCaptureDevice.Position = devicePosition == .back ? .front : .back
         setUpRecorder(position: position)
     }

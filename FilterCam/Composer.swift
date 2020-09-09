@@ -16,7 +16,11 @@ struct Composer {
         composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
 
         guard let clipVideoTrack = asset.tracks(withMediaType: .video).first else {
-            fatalError("failed to get track.")
+            //When the user does a quick tap on start recording/stop recording and
+            //the time is so short that the video doesn't store we return this error here.
+            let err = NSError(domain: "", code: 500, userInfo: [NSLocalizedDescriptionKey: "failed to get track."]) as Error
+            completion(nil, err)
+            return
         }
 
         let videoComposition = AVMutableVideoComposition()
