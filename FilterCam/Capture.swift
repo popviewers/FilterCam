@@ -39,6 +39,19 @@ final class Capture {
         }
     }
 
+    var torchMode: AVCaptureDevice.TorchMode {
+        set {
+            if !hasTorch { return }
+            if !videoDevice.isTorchAvailable { return }
+            try? videoDevice.lockForConfiguration()
+            videoDevice.torchMode = newValue
+            videoDevice.unlockForConfiguration()
+        }
+        get {
+            return videoDevice.torchMode
+        }
+    }
+
     let queue = DispatchQueue(label: "caputre_session_queue")
 
     private(set) var session: AVCaptureSession?

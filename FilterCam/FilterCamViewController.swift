@@ -43,6 +43,15 @@ open class FilterCamViewController: UIViewController {
         }
     }
 
+    public var torchMode: AVCaptureDevice.TorchMode {
+        set {
+            recorder.torchMode = newValue
+        }
+        get {
+            return recorder.torchMode
+        }
+    }
+
     public var shouldShowDebugLabels: Bool = false {
         didSet {
             fpsLabel.isHidden = !shouldShowDebugLabels
