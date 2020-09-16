@@ -52,6 +52,15 @@ final class Recorder: NSObject {
         }
     }
 
+    var torchMode: AVCaptureDevice.TorchMode {
+        set {
+            capture.torchMode = newValue
+        }
+        get {
+            return capture.torchMode
+        }
+    }
+
     private static let deviceRgbColorSpace = CGColorSpaceCreateDeviceRGB()
     private static let tempVideoFilename = "recording"
     private static let tempVideoFileExtention = "mov"
